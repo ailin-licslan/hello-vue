@@ -1,15 +1,26 @@
 <template>
+  
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  
+  <HelloWorld msg="Hello Vue"/>
+  
+  <TestVue message="licslan@sina.com"></TestVue>
+  
+  <VBind sex="mela"></VBind>
+  
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import TestVue from './components/Test.vue'
+import VBind from './components/VBind.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+	TestVue,
+	VBind
   }
 }
 </script>
