@@ -1,5 +1,4 @@
 <template>
-
 	<div>
 		<label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
 		<br><br>
@@ -102,36 +101,47 @@
 			<p style="white-space: pre">{{ message2 }}</p>
 
 		</div>
-		
+
 		<!-- 自定义指令 -->
 		<div id="app">
-		    <p>页面载入时，input 元素自动获取焦点：</p>
-		    <input v-focus>
+			<p>页面载入时，input 元素自动获取焦点：</p>
+			<input v-focus>
 		</div>
-		
+
+		<!-- info: 'Ajax 测试!!' -->
+		<button @click="getFeed12()">
+			Ajax test
+		</button>
+		<div id="appInfo">
+			result is : {{ info }}
+		</div>
+
 
 	</div>
 
 </template>
 
 <script>
+	import axios from "axios";
 	export default {
 		name: "VBind",
 		props: {
 			sex: String
 		},
 		directives: {
-		      focus: {
-		         // 指令的定义
-		         mounted(el) {
-		            el.focus()
-		         }
-		      }
-		   },
+			focus: {
+				// 指令的定义
+				mounted(el) {
+					el.focus()
+				}
+			}
+		},
+
 
 		//DATA 与  <template> 标签中元素有关联
 		data() {
 			return {
+				info: {},
 				message2: '菜鸟教程\r\nhttps://www.runoob.com',
 				name: 'licslan',
 				classObject: {
@@ -158,6 +168,19 @@
 			}
 		},
 
+		mounted: function() {
+			let url = "/try/ajax/json_demo.json";
+			axios.get('/apix' + url)
+				.then(res => {
+					console.log("===>>>>" + res);
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		},
+
+
+
 		methods: {
 
 			reverseMessage() {
@@ -182,9 +205,33 @@
 			},
 			two(event) {
 				alert(event)
+			},
+			getFeed() {
+				axios.get(
+						"api/index/ding.json", //请求url
+					)
+					// 网络请求成功
+					.then(res => {
+						console.log("成功", res)
+					})
+					// 网络请求失败
+					.catch(err => {
+						console.log("失败", err);
+					})
+			},
+			getFeed12() {
+				let url = "/try/ajax/json_demo.json";
+				axios.get('/apix' + url)
+					.then(res => {
+						console.log(res);
+					})
+					.catch(err => {
+						console.log(err);
+					})
 			}
 
 		},
+
 
 		computed: {
 
